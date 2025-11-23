@@ -17,25 +17,34 @@ dotenv.config();
 const app = express();
 
 //  CORS configuration to allow both local at online testing
-const allowedOrigins = [
-  process.env.FRONTEND_PROD || "https://full-stack-airline-flight-booking-s.vercel.app",
-];
+// const allowedOrigins = [
+//   process.env.FRONTEND_LOCAL,
+//   process.env.FRONTEND_PROD,
+// ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (like Postman)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "*",
+    // origin: allowedOrigins,
     credentials: true,
   })
 );
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // allow requests with no origin (like Postman)
+//       if (!origin) return callback(null, true);
+
+//       if (allowedOrigins.indexOf(origin) !== -1) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
 
 
 // Middleware
