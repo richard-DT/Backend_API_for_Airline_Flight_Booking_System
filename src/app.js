@@ -23,11 +23,20 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    // origin: "*",
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      // allow requests with no origin (like Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 // Middleware
 // app.use(cors());
