@@ -18,8 +18,7 @@ const app = express();
 
 //  CORS configuration to allow both local at online testing
 const allowedOrigins = [
-  process.env.FRONTEND_LOCAL,
-  process.env.FRONTEND_PROD,
+  process.env.FRONTEND_PROD || "https://full-stack-airline-flight-booking-s.vercel.app",
 ];
 
 app.use(
